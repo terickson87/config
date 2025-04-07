@@ -1,3 +1,4 @@
+############################### START OH-MY-ZSH ###############################
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -103,7 +104,40 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+############################### END OH-MY-ZSH ###############################
 
+## Time printing
+# place int your .zshrc files
+# If a command takes >10 SPU seconds, then print the time it takes
+REPORTTIME=10
+
+# Format the output of the time command to be a little more human friendly
+TIMEFMT="Elapse (hh:mm:ss.ttt): %*E User: %*U Kernel: %*S"
+
+display-start-time() {
+    strftime 'Start Time: %m/%d/%y %r %Z'
+}
+
+display-end-time() {
+    strftime 'End Time: %m/%d/%y %r %Z'
+}
+
+# https://github.com/nvm-sh/nvm?tab=readme-ov-file#zsh
+# display-current-nvm-npm-version() {
+#     nvm current | sed 's/.*/nvm current: &/'
+# }
+
+# Update zsh hooks
+# https://zsh.sourceforge.io/Doc/Release/Functions.html#Hook-Functions
+add-zsh-hook preexec display-start-time
+# add-zsh-hook precmd display-current-nvm-npm-version
+add-zsh-hook precmd display-end-time
+# add-ash-hook chpwd load-nvmrc
+
+# Run on shell start
+# load-nvmrc
+
+# Bare repo for config files
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
